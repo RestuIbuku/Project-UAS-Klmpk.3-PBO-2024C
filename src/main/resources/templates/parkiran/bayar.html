@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<head>
+    <title>Pembayaran Parkir</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body" id="strukContent">
+                        <h3 class="text-center mb-4">STRUK PEMBAYARAN PARKIR</h3>
+                        <hr>
+                        <div class="row mb-3">
+                            <div class="col-5">Nama</div>
+                            <div class="col-7">: <span th:text="${parkiran.user.nama}"></span></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-5">Jenis Kendaraan</div>
+                            <div class="col-7">: <span th:text="${parkiran.jenisKendaraan}"></span></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-5">Plat Nomor</div>
+                            <div class="col-7">: <span th:text="${parkiran.platNomor}"></span></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-5">Waktu Masuk</div>
+                            <div class="col-7">: <span th:text="${#temporals.format(parkiran.waktuMasuk, 'dd-MM-yyyy HH:mm')}"></span></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-5">Waktu Keluar</div>
+                            <div class="col-7">: <span th:text="${#temporals.format(parkiran.waktuKeluar, 'dd-MM-yyyy HH:mm')}"></span></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-5">Lama Parkir</div>
+                            <div class="col-7">: <span th:text="${parkiran.lamaParkir}"></span> jam</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-5">Tarif per Jam</div>
+                            <div class="col-7">: Rp <span th:text="${#numbers.formatDecimal(parkiran.tarifPerJam, 0, 'POINT', 0, 'COMMA')}"></span></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-5">Total Bayar</div>
+                            <div class="col-7">: Rp <span th:text="${#numbers.formatDecimal(parkiran.totalBayar, 0, 'POINT', 0, 'COMMA')}"></span></div>
+                        </div>
+                        
+                        <div class="text-center mt-4" th:if="${!parkiran.statusBayar}">
+                            <form th:action="@{/parkiran/bayar/{id}/process(id=${parkiran.id})}" method="post">
+                                <button type="submit" class="btn btn-success">Proses Pembayaran</button>
+                            </form>
+                        </div>
+                        <div class="text-center mt-4" th:if="${parkiran.statusBayar}">
+                            <div class="alert alert-success">Pembayaran Berhasil</div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <p>Terima kasih atas kunjungan Anda</p>
+                            <p>Simpan struk ini sebagai bukti pembayaran</p>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button onclick="window.print()" class="btn btn-primary">Cetak Struk</button>
+                        <a href="/parkiran" class="btn btn-secondary">Kembali</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style media="print">
+        @page {
+            size: 80mm 200mm;
+            margin: 5mm;
+        }
+        body * {
+            visibility: hidden;
+        }
+        #strukContent, #strukContent * {
+            visibility: visible;
+        }
+        #strukContent {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 70mm;
+        }
+    </style>
+</body>
+</html>
