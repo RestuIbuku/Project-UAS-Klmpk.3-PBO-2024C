@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<head>
+    <title>Sistem Parkir - Transaksi</title>
+</head>
+<body>
+    <div layout:fragment="content" class="fade-in">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">Daftar Transaksi</h2>
+            </div>
+            <div class="card-body">
+                <h2>Riwayat Transaksi</h2>
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Pendapatan</h5>
+                                <h3 class="card-text">Rp <span th:text="${#numbers.formatDecimal(totalPendapatan, 0, 'POINT', 0, 'COMMA')}">0</span></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Jumlah Transaksi</h5>
+                                <h3 class="card-text" th:text="${jumlahTransaksi}">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Rata-rata Pendapatan</h5>
+                                <h3 class="card-text">Rp <span th:text="${#numbers.formatDecimal(rataRataPendapatan, 0, 'POINT', 0, 'COMMA')}">0</span></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search and Filter Form -->
+                <form method="get" class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="search" name="search" 
+                                   th:value="${search}" placeholder="Cari berdasarkan plat nomor atau nama...">
+                            <button class="btn btn-primary" type="submit">Cari</button>
+                            <a th:href="@{/transaksi}" class="btn btn-secondary">Reset</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-select" id="filter" name="filter" onchange="this.form.submit()">
+                            <option value="">Semua Jenis Kendaraan</option>
+                            <option value="MOTOR" th:selected="${filter == 'MOTOR'}">Motor</option>
+                            <option value="MOBIL" th:selected="${filter == 'MOBIL'}">Mobil</option>
+                            <option value="TRUK" th:selected="${filter == 'TRUK'}">Truk</option>
+                        </select>
+                    </div>
+                </form>
+
+                <!-- Result message -->
+                <div class="alert alert-info" th:if="${search != null}">
+                    Hasil pencarian untuk: <strong th:text="${search}"></strong>
+                    <span th:if="${filter != null && filter != ''}">, 
+                        Filter: <strong th:text="${filter}"></strong>
+                    </span>
+                    (<span th:text="${#lists.size(transaksiList)}"></span> hasil)
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Plat Nomor</th>
+                                <th>Nama Pemilik</th>
+                                <th>Jenis Kendaraan</th>
+                                <th>Waktu Masuk</th>
+                                <th>Waktu Keluar</th>
+                                <th>Durasi</th>
+                                <th>Total Bayar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="transaksi, iterStat : ${transaksiList}">
+                                <td th:text="${iterStat.count}">1</td>
+                                <td th:text="${transaksi.platNomor}">B 1234 CD</td>
+                                <td th:text="${transaksi.user?.nama}">John Doe</td>
+                                <td th:text="${transaksi.jenisKendaraan}">Mobil</td>
+                                <td th:text="${#temporals.format(transaksi.waktuMasuk, 'dd-MM-yyyy HH:mm')}">01-01-2024 12:00</td>
+                                <td th:text="${#temporals.format(transaksi.waktuKeluar, 'dd-MM-yyyy HH:mm')}">01-01-2024 13:00</td>
+                                <td th:text="${transaksi.lamaParkir + ' jam'}">1 jam</td>
+                                <td>Rp <span th:text="${#numbers.formatDecimal(transaksi.totalBayar, 0, 'POINT', 0, 'COMMA')}">10000</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchText = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchText) ? '' : 'none';
+            });
+        });
+
+        document.getElementById('filterKendaraan').addEventListener('change', function(e) {
+            const filterValue = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const jenisKendaraan = row.children[3].textContent.toLowerCase();
+                row.style.display = !filterValue || jenisKendaraan === filterValue ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
