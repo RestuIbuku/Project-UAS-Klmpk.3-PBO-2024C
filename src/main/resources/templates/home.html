@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<head>
+    <title>Sistem Parkir - Home</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <h1 class="welcome-home">Selamat Datang di Sistem Parkir</h1>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Parkiran</h5>
+                        <p class="card-text">Kelola data parkir kendaraan dengan mudah dan efisien. Tambah, edit, dan monitor status parkir secara real-time.</p>
+                        <div class="d-grid">
+                            <a href="/parkiran" class="btn btn-primary">Kelola Parkiran</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Transaksi</h5>
+                        <p class="card-text">Pantau semua transaksi parkir, lihat riwayat pembayaran, dan kelola keuangan parkir dengan lebih baik.</p>
+                        <div class="d-grid">
+                            <a href="/transaksi" class="btn btn-primary">Lihat Transaksi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistik -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Kendaraan</h5>
+                        <h3 class="card-text" th:text="${totalKendaraan}">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Pendapatan Hari Ini</h5>
+                        <h3 class="card-text">Rp <span th:text="${pendapatanHariIni}">0</span></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Transaksi</h5>
+                        <h3 class="card-text" th:text="${totalTransaksi}">0</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
