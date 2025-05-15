@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<head>
+    <title>Form Parkiran</title>
+</head>
+<body>
+    <div layout:fragment="content" class="fade-in">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0" th:text="${parkiran.id == null ? 'Tambah Parkir' : 'Edit Parkir'}">Form Parkir</h2>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/parkiran/simpan}" method="post" th:object="${parkiran}" class="row g-3">
+                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden" th:if="${parkiran.id != null}" th:field="*{waktuMasuk}" />
+                    <input type="hidden" th:if="${parkiran.id != null}" th:field="*{statusBayar}" />
+                    <input type="hidden" th:if="${parkiran.id != null}" th:field="*{tarifPerJam}" />
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Nama Pengguna</label>
+                            <input type="text" class="form-control" th:field="*{user.nama}" required pattern="[A-Za-z\s]+" title="Hanya huruf dan spasi diperbolehkan">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">No. Telepon</label>
+                            <input type="text" class="form-control" th:field="*{user.noTelp}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Jenis Pengguna</label>
+                            <select class="form-select" th:field="*{user.jenisPengguna}" required>
+                                <option value="">Pilih Jenis Pengguna</option>
+                                <option value="REGULAR">Regular</option>
+                                <option value="VIP">VIP</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Jenis Kendaraan</label>
+                            <select class="form-select" th:field="*{jenisKendaraan}" required>
+                                <option value="">Pilih Jenis Kendaraan</option>
+                                <option value="MOTOR">Motor</option>
+                                <option value="MOBIL">Mobil</option>
+                                <option value="TRUK">Truk</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Plat Nomor</label>
+                            <input type="text" class="form-control" th:field="*{platNomor}" required>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <a href="/parkiran" class="btn btn-secondary">Kembali</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
