@@ -189,6 +189,25 @@ body {
     color: #6c757d;
 }
 
+.bg-primary {
+    background: linear-gradient(45deg, #4e73df, #224abe);
+    backdrop-filter: blur(5px);
+}
+
+.bg-success {
+    background: linear-gradient(45deg, #1cc88a, #169a6b);
+    backdrop-filter: blur(5px);
+}
+
+.bg-info {
+    background: linear-gradient(45deg, #36b9cc, #258391);
+    backdrop-filter: blur(5px);
+}
+
+.text-white .card-text {
+    color: rgba(255, 255, 255, 0.8);
+}
+
 .btn {
     border-radius: 8px;
     padding: 0.6rem 1.2rem;
