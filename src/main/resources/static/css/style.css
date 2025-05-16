@@ -45,3 +45,19 @@ body {
     transform: translateY(-50%);
     color: #6c757d;
 }
+
+.table-responsive {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 1rem;
+    backdrop-filter: blur(5px);
+    margin-top: 1rem;
+}
+
+
+.struk-print {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+}
