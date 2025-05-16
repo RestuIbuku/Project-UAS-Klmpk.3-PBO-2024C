@@ -23,3 +23,12 @@ public class SortingUtil {
                         Comparator.nullsLast(Comparator.naturalOrder())))
                 .collect(Collectors.toList());
     }
+
+     public List<ParkiranEntity> sortByNama(List<ParkiranEntity> listParkir) {
+        return listParkir.stream()
+                .filter(p -> p.getUser() != null && p.getUser().getNama() != null)
+                .sorted(Comparator.comparing(
+                    p -> p.getUser().getNama().toLowerCase(),
+                    Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER)))
+                .collect(Collectors.toList());
+    }
