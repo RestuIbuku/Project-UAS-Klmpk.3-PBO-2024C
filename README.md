@@ -1,4 +1,4 @@
-<h1 align="center">Project UAS Kelompok 3 PBO 2024C dfv</h1>
+<h1 align="center">Project UAS Kelompok 3 PBO 2024C</h1>
 <h3 align="center">Selamat datang semua di repo project kami kelompok 3 dengan aplikasi admin parkir.</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=xryenn&label=Profile%20views&color=0e75b6&style=flat" alt="RestuIbuku" /> </p>
