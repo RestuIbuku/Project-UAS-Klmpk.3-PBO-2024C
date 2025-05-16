@@ -188,3 +188,55 @@ body {
     margin-bottom: 1.5rem;
     color: #6c757d;
 }
+
+.btn {
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #4e73df, #224abe);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #224abe, #4e73df);
+}
+
+.btn-warning {
+    background: linear-gradient(45deg, #f6c23e, #dda20a);
+    border: none;
+    color: white;
+}
+
+.btn-danger {
+    background: linear-gradient(45deg, #e74a3b, #be2617);
+    border: none;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px);
+        backdrop-filter: blur(0);
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0);
+        backdrop-filter: blur(5px);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
