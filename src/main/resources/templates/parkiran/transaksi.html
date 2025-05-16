@@ -40,7 +40,6 @@
                     </div>
                 </div>
 
-                <!-- Search and Filter Form -->
                 <form method="get" class="row mb-3">
                     <div class="col-md-6">
                         <div class="input-group">
@@ -60,7 +59,7 @@
                     </div>
                 </form>
 
-                <!-- Result message -->
+                
                 <div class="alert alert-info" th:if="${search != null}">
                     Hasil pencarian untuk: <strong th:text="${search}"></strong>
                     <span th:if="${filter != null && filter != ''}">, 
