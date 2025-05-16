@@ -18,3 +18,9 @@ body {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
+
+.parkiran-header {
+     background-color: #f8f9fa;
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
