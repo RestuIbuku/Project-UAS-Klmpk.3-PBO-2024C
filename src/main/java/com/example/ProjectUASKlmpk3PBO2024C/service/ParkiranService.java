@@ -24,7 +24,7 @@ public class ParkiranService {
     public ParkiranEntity saveParkiran(ParkiranEntity parkiran) {
         if (parkiran.getUser() != null) {
             UserEntity user = parkiran.getUser();
-            // Simpan user baru jika belum ada id
+            
             if (user.getId() == null) {
                 user = userRepository.save(user);
             }
