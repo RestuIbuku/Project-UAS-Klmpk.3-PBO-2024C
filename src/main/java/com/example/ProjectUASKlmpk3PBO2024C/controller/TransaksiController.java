@@ -12,3 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+@Component
+public class SortingUtil {
+    
+    public List<ParkiranEntity> sortByTarif(List<ParkiranEntity> listParkir) {
+        return listParkir.stream()
+                .filter(p -> p.getTarifPerJam() != null)
+                .sorted(Comparator.comparing(ParkiranEntity::getTarifPerJam, 
+                        Comparator.nullsLast(Comparator.naturalOrder())))
+                .collect(Collectors.toList());
+    }
