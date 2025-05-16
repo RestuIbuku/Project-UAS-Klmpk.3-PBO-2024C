@@ -46,6 +46,36 @@ body {
     color: #6c757d;
 }
 
+.sort-buttons {
+    margin-bottom: 20px;
+}
+
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: linear-gradient(45deg, #4e73df20, #224abe20);
+    color: #2c3e50;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    border-bottom: 2px solid #4e73df40;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(78, 115, 223, 0.1);
+}
+
+.table-parkiran {
+    margin-top: 20px;
+}
+
 .table-responsive {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
@@ -100,3 +130,4 @@ body {
     border-color: #4e73df;
     box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
 }
+
