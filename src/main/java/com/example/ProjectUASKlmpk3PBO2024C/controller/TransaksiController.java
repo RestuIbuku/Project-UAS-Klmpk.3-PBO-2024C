@@ -32,3 +32,12 @@ public class SortingUtil {
                     Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER)))
                 .collect(Collectors.toList());
     }
+
+    public List<ParkiranEntity> sortByWaktu(List<ParkiranEntity> listParkir) {
+        return listParkir.stream()
+                .filter(p -> p.getWaktuMasuk() != null)
+                .sorted(Comparator.comparing(ParkiranEntity::getWaktuMasuk,
+                        Comparator.nullsLast(Comparator.naturalOrder())))
+                .collect(Collectors.toList());
+    }
+}
