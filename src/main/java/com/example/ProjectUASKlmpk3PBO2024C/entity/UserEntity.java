@@ -13,7 +13,7 @@ public class UserEntity {
     private String noTelp;
     private String jenisPengguna;
 
-    // Getter dan Setter
+    
     public Long getId() {
         return id;
     }
