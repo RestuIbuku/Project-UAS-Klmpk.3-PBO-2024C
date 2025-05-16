@@ -31,11 +31,11 @@ public class ParkiranController {
                              @RequestParam(required = false) String sortBy) {
         List<ParkiranEntity> parkiranList = parkiranService.getAllParkiran();
         
-        // Jika ada pencarian
+        
         if (search != null && !search.isEmpty()) {
-            if (search.matches(".*\\d+.*")) { // Jika mengandung angka, cari berdasarkan plat
+            if (search.matches(".*\\d+.*")) { 
                 parkiranList = searchingUtil.searchByPlat(parkiranList, search);
-            } else { // Jika tidak mengandung angka, cari berdasarkan nama
+            } else { 
                 parkiranList = searchingUtil.searchByNama(parkiranList, search);
             }
         }
@@ -75,7 +75,7 @@ public class ParkiranController {
     @PostMapping("/simpan")
     public String simpanParkiran(@ModelAttribute ParkiranEntity parkiran) {
         try {
-            // Set waktu masuk dan status bayar jika data baru
+            
             if (parkiran.getId() == null) {
                 parkiran.setWaktuMasuk(LocalDateTime.now());
                 parkiran.setStatusBayar(false);
@@ -85,7 +85,7 @@ public class ParkiranController {
                     case "TRUK": parkiran.setTarifPerJam(10000); break;
                 }
             }
-            // Pastikan user tidak null
+            
             if (parkiran.getUser() == null) {
                 throw new IllegalArgumentException("User tidak boleh kosong!");
             }
@@ -114,21 +114,21 @@ public class ParkiranController {
     public String showBayar(@PathVariable Long id, Model model) {
         ParkiranEntity parkiran = parkiranService.getParkiranById(id);
         
-        // Set waktu keluar dan hitung biaya jika belum dibayar
+        
         if (!parkiran.getStatusBayar()) {
             LocalDateTime waktuKeluar = LocalDateTime.now();
             parkiran.setWaktuKeluar(waktuKeluar);
             
-            // Hitung lama parkir dalam jam
+            
             long hours = ChronoUnit.HOURS.between(parkiran.getWaktuMasuk(), waktuKeluar);
             int lamaParkir = (int) Math.max(1, hours); // minimal 1 jam
             parkiran.setLamaParkir(lamaParkir);
             
-            // Hitung total bayar
+            
             int totalBayar = lamaParkir * parkiran.getTarifPerJam();
             parkiran.setTotalBayar(totalBayar);
             
-            // Simpan perubahan
+            
             parkiranService.saveParkiran(parkiran);
         }
         
@@ -141,7 +141,7 @@ public class ParkiranController {
         ParkiranEntity parkiran = parkiranService.getParkiranById(id);
         if (!parkiran.getStatusBayar()) {
             parkiran.setStatusBayar(true);
-            // Pastikan waktu keluar dan total bayar sudah terisi
+           
             if (parkiran.getWaktuKeluar() == null) {
                 parkiran.setWaktuKeluar(LocalDateTime.now());
             }
