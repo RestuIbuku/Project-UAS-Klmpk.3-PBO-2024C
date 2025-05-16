@@ -23,7 +23,6 @@ public class ParkiranEntity {
     private Integer totalBayar;
     private Boolean statusBayar;
 
-    // Getter dan Setter
     public Long getId() {
         return id;
     }
