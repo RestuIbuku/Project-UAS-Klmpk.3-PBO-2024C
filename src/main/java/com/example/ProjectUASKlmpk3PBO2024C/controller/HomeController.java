@@ -18,7 +18,7 @@ public class HomeController {
     
     @GetMapping("/")
     public String home(Model model) {
-        // Menambahkan data untuk dashboard dengan penanganan null
+        
         model.addAttribute("totalKendaraan", parkiranService.getJumlahKendaraan());
         model.addAttribute("pendapatanHariIni", transaksiService.getPendapatanHariIni() != null ? 
             String.format("%,.0f", transaksiService.getPendapatanHariIni()) : "0");
