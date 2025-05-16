@@ -56,7 +56,7 @@ public class TransaksiService {
         return parkir.getLamaParkir() * parkir.getTarifPerJam();
     }
 
-    // Mendapatkan transaksi dengan pembayaran tertinggi
+    
     public ParkiranEntity getTransaksiTertinggi() {
         List<ParkiranEntity> semuaParkir = getAllTransaksi();
         return semuaParkir.stream()
@@ -64,7 +64,7 @@ public class TransaksiService {
                 .orElse(null);
     }
 
-    // Mendapatkan transaksi dengan pembayaran terendah
+   
     public ParkiranEntity getTransaksiTerendah() {
         List<ParkiranEntity> semuaParkir = getAllTransaksi();
         return semuaParkir.stream()
@@ -72,7 +72,7 @@ public class TransaksiService {
                 .orElse(null);
     }
 
-    // Menghitung jumlah transaksi berdasarkan jenis kendaraan
+    
     public long getJumlahTransaksiByJenisKendaraan(String jenisKendaraan) {
         List<ParkiranEntity> semuaParkir = getAllTransaksi();
         return semuaParkir.stream()
